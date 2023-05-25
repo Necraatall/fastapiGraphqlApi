@@ -1,4 +1,5 @@
 import os
+from typing import Any
 
 import uvicorn
 from dotenv import load_dotenv
@@ -43,9 +44,19 @@ def add_author(author: SchemaAuthor):
 @app.get("/books/")
 def get_books():
     books = db.session.query(Book).all()
-
     return books
 
+@app.get("/authors/")
+def get_authors():
+    author = db.session.query(Author).all()
+    return author
+
+# TODO: dodelat
+# @app.get("/author_books/{'author_name'}")
+# async def get_author_books(author_name):
+#     authors_books = db.session.query(Book).filter(Book.author==author_name).all()
+#     # return authors_books
+#     return {"author_books": [authors_books]}
 
 # @app.post("/user/", response_model=SchemaUser)
 # def create_user(user: SchemaUser):
